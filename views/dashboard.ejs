@@ -1,0 +1,21 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%= user.name %></p>
+
+<% if (typeof sessions !== 'undefined') { %>
+    <P>Current Active Sessions:</P>
+    <% for (sessionId in sessions) { %>
+        <% const href = "/revoke/" + sessionId%>
+        <ul class="list-unstyled">
+            <li>SessionID: <%= sessionId %></li>
+            <li>UserId: <%= sessions[sessionId] %></li>
+            <li><a href="<%= href %>">Revoke sesison</a></li>
+        </ul>
+    <% } %>
+    <p><a href="/dashboard">Back to Dashboard</a><p>
+<% } else { %>
+    <% if (user.role === "admin") { %>
+        <p><a href="admin">Session Control</a></p>
+    <% } %>
+<% } %>
+
+<a href="/auth/logout" class="btn btn-secondary">Logout</a>
