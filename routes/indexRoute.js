@@ -21,7 +21,6 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
 // localhost:8000/admin
 router.get("/admin", ensureAuthenticated, (req, res) => {
   if (req.user.role === "admin") {    
-    // const sessions = createSessionList(req.sessionStore.sessions);
     const sessions = {};
     for (id in req.sessionStore.sessions) {
       const cookie = JSON.parse(req.sessionStore.sessions[id]);
@@ -34,9 +33,7 @@ router.get("/admin", ensureAuthenticated, (req, res) => {
   } else {
     res.send("You can't access the admin page");
   }
-
 });
-
 
 // ---------- Revoke Route ---------- //
 // localhost:8000/revoke/:sessionId
@@ -47,12 +44,6 @@ router.get("/revoke/:sessionId", (req, res) => {
       console.log(err)
     } else {
       res.redirect("/admin")
-      // const sessions = createSessionList(req.sessionStore.sessions);
-      // res.render("admin", {
-      //   user: req.user,
-      //   sessions: sessions
-      // });
-      console.log(`${sessionId} is deleted.`);
     }
   })
 });

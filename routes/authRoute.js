@@ -26,6 +26,7 @@ router.post(
 router.get('/github',
   passport.authenticate('github'));
 
+// called after github authentication is done 
 router.get(
   '/github/callback',
   passport.authenticate("github", {
